@@ -12,8 +12,8 @@ var Rocket = /** @class */ (function () {
         var sum = 0;
         for (var i = 0; i < items.length; i++) {
             sum = sum + items[i].massKg;
-            return sum;
         }
+        return sum;
     };
     Rocket.prototype.currentMassKg = function () {
         return this.sumMass(this.astronauts) + this.sumMass(this.cargoItems);
@@ -21,6 +21,24 @@ var Rocket = /** @class */ (function () {
     Rocket.prototype.canAdd = function (item) {
         if (this.currentMassKg() + item.massKg <= this.totalCapacityKg) {
             return true;
+        }
+    };
+    Rocket.prototype.addCargo = function (cargo) {
+        if (this.canAdd(cargo)) {
+            this.cargoItems.push(cargo);
+            return true;
+        }
+        else {
+            return false;
+        }
+    };
+    Rocket.prototype.addAstronaut = function (astronaut) {
+        if (this.canAdd(astronaut)) {
+            this.astronauts.push(astronaut);
+            return true;
+        }
+        else {
+            return false;
         }
     };
     return Rocket;
